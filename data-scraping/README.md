@@ -9,6 +9,7 @@ Able to bypass Twitter API limitations, but unable to crawl for tweets according
 
 Items crawled: 
 User | Date Created | No. of likes | No. of retweets | Source of Tweet | Tweet | Language | Url
+
 *Note: Tweets crawled are English language 
 
 
