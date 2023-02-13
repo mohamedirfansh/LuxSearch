@@ -6,6 +6,7 @@ To Edit
 ## Twitter Scraper
 ### Using snscrape 
 Able to bypass Twitter API limitations, but unable to crawl for tweets according to hours (unable to crawl for tweets in 2 hour intervals --> tweets may come from same timeframe) 
+
 Items crawled: 
 User | Date Created | No. of likes | No. of retweets | Source of Tweet | Tweet | Language | Url
 *Note: Tweets crawled are English language 
