@@ -10,18 +10,18 @@ from bs4 import BeautifulSoup
 import json
 import time
 
-daysFrom1Jan22 = 100#397 
-daysFrom31Dec22 = 31
+daysFromNov22 = 121#397 
+daysFromPresent = 0
 Start = time.time()
 
-Brands = ['Gucci','Dior','Chanel','Louis%20Vuitton','Hermes','Rolex','Tiffany%20%26%20Co.']
+Brands = ['Balenciaga','Dior','Bottega%20Venetta','Louis%20Vuitton','Hermes','Rolex','Tiffany%20%26%20Co.']
 Excel = pandas.ExcelWriter(r"C:\Users\ng_zh\Desktop\LuxSearch\data-scraping\Data\PushShiftAPI.xlsx", engine = 'xlsxwriter')
 for brand in Brands:
     print("Working on " + brand)
-    daysFrom1Jan22 = 90
+    daysFromNov22 = 121
     tempTable = {"Date": [], "Subreddit" : [], "Title": [], "Post Text": [], "Author": [], "Upvotes": [], "CommentsCount": [], "URL": []}
-    while((daysFrom1Jan22 - 1) != daysFrom31Dec22):
-        x = requests.get('https://api.pushshift.io/reddit/search/submission?q='+ brand +'&over_18=false&after='+ str(daysFrom1Jan22) +'d&before='+ str(daysFrom1Jan22 - 1) +'d&sort=created_utc&size=100')
+    while((daysFromNov22 - 1) != daysFromPresent):
+        x = requests.get('https://api.pushshift.io/reddit/search/submission?q='+ brand.lower() +'&over_18=false&after='+ str(daysFromNov22) +'d&before='+ str(daysFromNov22 - 1) +'d&sort=created_utc&size=100')
         Page = BeautifulSoup(x.content, 'html.parser')
         posts = json.loads(Page.text)
         for post in posts['data']:
@@ -33,7 +33,7 @@ for brand in Brands:
             tempTable["Upvotes"].append(post["score"])
             tempTable["CommentsCount"].append(post["num_comments"])
             tempTable["URL"].append("https://www.reddit.com/" + post["permalink"])  
-        daysFrom1Jan22 -= 1
+        daysFromNov22 -= 1
         time.sleep(0.5)
     toSave = pandas.DataFrame(tempTable)
     toSave = toSave.drop_duplicates(subset=['Title'])
@@ -41,6 +41,8 @@ for brand in Brands:
         toSave.to_excel(Excel, sheet_name='Louis Vuitton', index=False) 
     elif(brand == 'Tiffany%20%26%20Co.'):
         toSave.to_excel(Excel, sheet_name='Tiffany & Co.', index=False) 
+    elif(brand == 'Bottega%20Venetta'):
+        toSave.to_excel(Excel, sheet_name='Bottega Venetta', index=False) 
     else:
         toSave.to_excel(Excel, sheet_name=brand, index=False) 
     print("--- %s seconds ---" % (time.time() - Start))
