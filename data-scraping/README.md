@@ -1,8 +1,5 @@
 # LuxSearch
 
-## Instragram Scraper
-To Edit
-
 ## Twitter Scraper
 ### Using snscrape 
 Able to bypass Twitter API limitations, but unable to crawl for tweets according to hours (unable to crawl for tweets in 2 hour intervals --> tweets may come from same timeframe) 
@@ -27,3 +24,11 @@ Limitations
 - Only able to fetch up to last 3 months (90days)
 
 Results: [PushShiftAPI](../data-scraping/Data/PushShiftAPI.xlsx)
+
+### Data Preprocessing
+Items removed: 
+1. URLs in text data
+2. Emails
+3. Punctuations
+4. Numbers
+5. Stopwords (included nan and removed; excluded not and no) --> used nltk.corpus stopwords
