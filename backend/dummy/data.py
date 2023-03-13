@@ -7,76 +7,74 @@ dummyResponse = {
   },
   'items': [
     {
-      'title': 'impavidi39',
+      'type': 'twitter',
+      'author': 'impavidi39',
       'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
+      'data':
         'gucci has some awful outfits and I prefer their outfits before gucci',
       'score': -0.75,
       'likes': 65,
       'retweets': 2,
     },
     {
-      'title': 'impavidi39',
+      'type': 'reddit',
+      'author': 'rasmus1254',
+      'sub': 'QualityReps',
+      'link': 'https://www.reddit.com//r/QualityReps/comments/ym2h1k/finally_got_my_balenciaga_ravers_in_hand_and_i_am/',
+      'data': 'Finally got Balenciaga Ravers hand disappointed amount flaws',
+      'score': -0.43,
+      'upvotes': 1,
+      'comments': 0,
+    },
+    {
+      'type': 'twitter',
+      'author': 'impavidi39',
       'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
+      'data':
         'gucci has some awful outfits and I prefer their outfits before gucci',
       'score': -0.75,
       'likes': 65,
       'retweets': 2,
     },
     {
-      'title': 'impavidi39',
+      'type': 'twitter',
+      'author': 'impavidi39',
       'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
+      'data':
         'gucci has some awful outfits and I prefer their outfits before gucci',
       'score': -0.75,
       'likes': 65,
       'retweets': 2,
     },
     {
-      'title': 'impavidi39',
+      'type': 'reddit',
+      'author': 'rasmus1254',
+      'sub': 'QualityReps',
+      'link': 'https://www.reddit.com//r/QualityReps/comments/ym2h1k/finally_got_my_balenciaga_ravers_in_hand_and_i_am/',
+      'data': 'Finally got Balenciaga Ravers hand disappointed amount flaws',
+      'score': -0.43,
+      'upvotes': 1,
+      'comments': 0,
+    },
+    {
+      'type': 'twitter',
+      'author': 'impavidi39',
       'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
+      'data':
         'gucci has some awful outfits and I prefer their outfits before gucci',
       'score': -0.75,
       'likes': 65,
       'retweets': 2,
     },
     {
-      'title': 'impavidi39',
-      'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
-        'gucci has some awful outfits and I prefer their outfits before gucci',
-      'score': -0.75,
-      'likes': 65,
-      'retweets': 2,
-    },
-    {
-      'title': 'impavidi39',
-      'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
-        'gucci has some awful outfits and I prefer their outfits before gucci',
-      'score': -0.75,
-      'likes': 65,
-      'retweets': 2,
-    },
-    {
-      'title': 'impavidi39',
-      'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
-        'gucci has some awful outfits and I prefer their outfits before gucci',
-      'score': -0.75,
-      'likes': 65,
-      'retweets': 2,
-    },
-    {
-      'title': 'impavidi39',
-      'link': 'https://twitter.com/impavidi39/status/1477429342359670784',
-      'snippet':
-        'gucci has some awful outfits and I prefer their outfits before gucci',
-      'score': -0.75,
-      'likes': 65,
-      'retweets': 2,
+      'type': 'reddit',
+      'author': 'rasmus1254',
+      'sub': 'QualityReps',
+      'link': 'https://www.reddit.com//r/QualityReps/comments/ym2h1k/finally_got_my_balenciaga_ravers_in_hand_and_i_am/',
+      'data': 'Finally got Balenciaga Ravers hand disappointed amount flaws',
+      'score': -0.43,
+      'upvotes': 1,
+      'comments': 0,
     },
   ],
 };
