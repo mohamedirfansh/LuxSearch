@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
 import TwitterResults from '../components/search-container/TwitterResults';
 import ResponseTwitter from '../dummy_response/ResponseTwitter';
+import configs from '../configs';
 
 function Twitter({ results }) {
   const router = useRouter();
@@ -25,7 +26,7 @@ function Twitter({ results }) {
 export default Twitter;
 
 export async function getServerSideProps(context) {
-  const useDummyData = true;
+  const useDummyData = configs.useDummyData;
   const q = context.query.q;
 
   if (q === undefined || q === null || q.length < 1) {

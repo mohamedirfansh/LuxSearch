@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { useRouter } from 'next/router';
 import RedditResults from '../components/search-container/RedditResults';
 import ResponseReddit from '../dummy_response/ResponseReddit';
+import configs from '../configs';
 
 function Reddit({ results }) {
   const router = useRouter();
@@ -25,7 +26,7 @@ function Reddit({ results }) {
 export default Reddit;
 
 export async function getServerSideProps(context) {
-  const useDummyData = true;
+  const useDummyData = configs.useDummyData;
   const q = context.query.q;
 
   if (q === undefined || q === null || q.length < 1) {

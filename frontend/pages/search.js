@@ -7,6 +7,7 @@ import Response2 from "../dummy_response/Response2";
 import { useRouter } from "next/router";
 import SearchResults from "../components/search-container/SearchResults";
 import Footer from "../components/Footer";
+import configs from '../configs';
 
 function Search({ results, related }) {
   const router = useRouter();
@@ -26,7 +27,7 @@ function Search({ results, related }) {
 export default Search;
 
 export async function getServerSideProps(context) {
-  const useDummyData = true;
+  const useDummyData = configs.useDummyData;
   const apikey = process.env.API_KEY;
   const cxkey = process.env.CONTEXTS_KEY;
   const rapidkey = process.env.RAPID_KEY;
