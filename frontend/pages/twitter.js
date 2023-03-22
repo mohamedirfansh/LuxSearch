@@ -10,6 +10,7 @@ import configs from '../configs';
 function Twitter({ results }) {
   const router = useRouter();
 
+  console.log(results);
   return (
     <div>
       <Head>
@@ -40,7 +41,7 @@ export async function getServerSideProps(context) {
 
   const resData = useDummyData
     ? ResponseTwitter
-    : await fetch(`http://127.0.0.1:5000/api/search/twitter`).then((response) =>
+    : await fetch(`http://127.0.0.1:5000/api/twitter?q=${q}`).then((response) =>
         response.json()
       );
 

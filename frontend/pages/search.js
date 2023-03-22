@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
   const resData = useDummyData
     ? Response
     : await fetch(
-        `http://127.0.0.1:5000/api/search`
+        `http://127.0.0.1:5000/api/search?q=${q}`
       ).then((response) => response.json());
 
   const options = {
@@ -59,17 +59,17 @@ export async function getServerSideProps(context) {
     body: `{"gl":"US","hl":"en_US","keywords":["${context.query.q}"]}`,
   };
 
-  const secData = useDummyData
-    ? Response2
-    : await fetch(
-        "https://google-search-5.p.rapidapi.com/google/search-suggestions",
-        options
-      ).then((response) => response.json());
+  // const secData = useDummyData
+  //   ? Response2
+  //   : await fetch(
+  //       "https://google-search-5.p.rapidapi.com/google/search-suggestions",
+  //       options
+  //     ).then((response) => response.json());
 
   return {
     props: {
       results: resData,
-      related: secData,
+      // related: secData,
     },
   };
 }
