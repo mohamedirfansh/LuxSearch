@@ -3,14 +3,14 @@ from dummy.data import dummyResponse
 from config import USE_MOCK_DATA
 from utils.elasticsearch import elastic_client
 
-search = Blueprint(name='search', import_name=__name__)
+twitter = Blueprint(name='twitter', import_name=__name__)
 
-@search.route('/', methods=['GET'])
-def search_query():
+@twitter.route('/', methods=['GET'])
+def twitter_search():
     if USE_MOCK_DATA:
         output = dummyResponse
         return jsonify(output)
-
+    
     query = request.args.get('q')
     query_body = {
         "size": 10,
