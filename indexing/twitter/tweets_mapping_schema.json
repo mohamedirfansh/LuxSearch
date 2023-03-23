@@ -1,0 +1,20 @@
+{
+  "mappings": {
+    "properties": {
+      "username": { "type": "keyword" },
+      "date": { "type": "date" },
+      "likes": { "type": "integer" },
+      "retweets": { "type": "integer" },
+      "url": { "type": "keyword" },
+      "original_tweet": {
+        "type": "text",
+        "store": true
+      },
+      "processed_tweet": {
+        "type": "text",
+        "index": true,
+        "store": false
+      }
+    }
+  }
+}

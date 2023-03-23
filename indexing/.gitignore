@@ -1,2 +1,4 @@
 __pycache__/
 secrets.py
+processed_tweets.csv
+processed_reddit.csv
