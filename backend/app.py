@@ -4,6 +4,7 @@ from utils.elasticsearch import elastic_client
 
 from endpoints.search import search
 from endpoints.twitter import twitter
+from endpoints.reddit import reddit
 
 # init Flask app
 app = Flask(__name__)
@@ -17,6 +18,7 @@ elastic_client.info()
 #app.register_blueprint(search, url_prefix='/api/search/<int:id>')
 app.register_blueprint(search, url_prefix='/api/search')
 app.register_blueprint(twitter, url_prefix='/api/twitter')
+app.register_blueprint(reddit, url_prefix='/api/reddit')
 
 if __name__ == '__main__':
     app.run(debug=True)
