@@ -10,7 +10,6 @@ import configs from '../configs';
 function Twitter({ results }) {
   const router = useRouter();
 
-  console.log(results);
   return (
     <div>
       <Head>

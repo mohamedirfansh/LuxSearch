@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 
   const resData = useDummyData
     ? ResponseReddit
-    : await fetch(`http://127.0.0.1:5000/api/search/reddit`).then((response) =>
+    : await fetch(`http://127.0.0.1:5000/api/reddit?q=${q}`).then((response) =>
         response.json()
       );
 
