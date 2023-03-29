@@ -12,7 +12,9 @@ def twitter_search():
         return jsonify(output)
     
     query = request.args.get('q')
+    start = request.args.get('start', 0)
     query_body = {
+        "from": start,
         "size": 10,
         "query": {
             "match": {
