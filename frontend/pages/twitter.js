@@ -28,6 +28,7 @@ export default Twitter;
 export async function getServerSideProps(context) {
   const useDummyData = configs.useDummyData;
   const q = context.query.q;
+  const startIndex = context.query.start || '0';
 
   if (q === undefined || q === null || q.length < 1) {
     return {
@@ -40,9 +41,9 @@ export async function getServerSideProps(context) {
 
   const resData = useDummyData
     ? ResponseTwitter
-    : await fetch(`http://127.0.0.1:5000/api/twitter?q=${q}`).then((response) =>
-        response.json()
-      );
+    : await fetch(
+        `http://127.0.0.1:5000/api/twitter?q=${q}&start=${startIndex}`
+      ).then((response) => response.json());
 
   return {
     props: {

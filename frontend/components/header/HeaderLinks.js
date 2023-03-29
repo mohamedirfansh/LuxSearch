@@ -33,8 +33,9 @@ function HeaderLinks() {
         />
         <HeaderLink
           Icon={ChartBarIcon}
-          title="Advance"
-          link={`/advance?q=${q}`}
+          title="Statistics"
+          link={`/stats?q=${q}`}
+          selected={router.pathname == '/stats' ? true : false}
         />
       </div>
     </div>

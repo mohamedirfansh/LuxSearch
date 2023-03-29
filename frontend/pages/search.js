@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "/",
+        destination: "",
       },
     };
   }
@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
   const resData = useDummyData
     ? Response
     : await fetch(
-        `http://127.0.0.1:5000/api/search?q=${q}`
+        `http://127.0.0.1:5000/api/search?q=${q}&start=${startIndex}`
       ).then((response) => response.json());
 
   const options = {

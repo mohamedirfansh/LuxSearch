@@ -24,7 +24,7 @@ function TwitterCard({ result }) {
             @{result._source.username}
           </h2>
         </a>
-        <p className="text-xs text-gray-500">tf-idf: {result._score}</p>
+        <p className="text-xs text-gray-500">score: {result._score}</p>
       </div>
       <p className="mt-2 mb-2 line-clamp-3 text-gray-600 dark:text-gray-200">
         {result._source.original_tweet}
