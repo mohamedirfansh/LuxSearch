@@ -1,7 +1,7 @@
 import React from 'react';
 import { TagCloud } from 'react-tagcloud';
 
-const data = [
+const dummyData = [
   { value: 'JavaScript', count: 38 },
   { value: 'React', count: 30 },
   { value: 'Nodejs', count: 28 },
@@ -23,10 +23,9 @@ const data = [
   { value: 'wer', count: 12 },
   { value: 'xoxo', count: 20 },
   { value: 'lqwlljw', count: 3 },
-
 ];
 
-function WordCloud() {
+function WordCloud({ data }) {
   return <TagCloud minSize={12} maxSize={35} tags={data} />;
 }
 

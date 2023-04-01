@@ -33,7 +33,7 @@ export const options = {
       position: 'right',
     },
     title: {
-      display: true,
+      display: false,
       text: 'Top 10 users posts',
     },
   },
@@ -52,7 +52,7 @@ const labels = [
   'BestTLD',
 ];
 
-export const data = {
+export const dummyData = {
   labels: labels,
   datasets: [
     {
@@ -70,8 +70,25 @@ export const data = {
   ],
 };
 
-function HorizontalBar() {
-  return <Bar options={options} data={data} />;
+function HorizontalBar({ data }) {
+  const color =
+    data.index == 'twitter' ? configs.twitterColor : configs.redditColor;
+
+  const border =
+    data.index == 'twitter' ? 'rgb(53, 162, 235)' : 'rgb(255, 99, 132)';
+
+  const newData = {
+    labels: data.labels,
+    datasets: [
+      {
+        label: data.index,
+        data: data.data,
+        borderColor: border,
+        backgroundColor: color,
+      },
+    ],
+  };
+  return <Bar options={options} data={newData} />;
 }
 
 export default HorizontalBar;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import configs from '../configs';
 import StatResults from '../components/search-container/StatsResults';
 
-function Stats({ results }) {
+function Stats({ wordcloud, likes, upvotes, postsmonth, split, twitterusers, redditusers }) {
   const router = useRouter();
 
   return (
@@ -16,7 +16,15 @@ function Stats({ results }) {
         <link rel="icon" href="/favicon.ico?v=2" />
       </Head>
       <Header q={router.query.q} />
-      <StatResults />
+      <StatResults
+        wordcloud={wordcloud.wordcloud}
+        likes={likes.aggregations.avg_likes.value}
+        upvotes={upvotes.aggregations.avg_upvotes.value}
+        postsmonth={postsmonth}
+        split={split}
+        twitterusers={twitterusers}
+        redditusers={redditusers}
+      />
       <Footer />
     </div>
   );
@@ -24,29 +32,55 @@ function Stats({ results }) {
 
 export default Stats;
 
-// export async function getServerSideProps(context) {
-//   const useDummyStats = configs.useDummyStats;
-//   const q = context.query.q;
-//   const startIndex = context.query.start || '0';
+export async function getServerSideProps(context) {
+  const q = context.query.q;
 
-//   if (q === undefined || q === null || q.length < 1) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: '/',
-//       },
-//     };
-//   }
+  if (q === undefined || q === null || q.length < 1) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
 
-//   const resStats = useDummyStats
-//     ? ResponseTwitter
-//     : await fetch(
-//         `http://127.0.0.1:5000/api/stats?q=${q}&start=${startIndex}`
-//       ).then((response) => response.json());
+  const wordCounts = await fetch(
+    `http://127.0.0.1:5000/api/stats/wordcloud?q=${q}`
+  ).then((response) => response.json());
 
-//   return {
-//     props: {
-//       results: resStats,
-//     },
-//   };
-// }
+  const avgLikes = await fetch(
+    `http://127.0.0.1:5000/api/stats/likes?q=${q}`
+  ).then((response) => response.json());
+
+  const avgUpvotes = await fetch(
+    `http://127.0.0.1:5000/api/stats/upvotes?q=${q}`
+  ).then((response) => response.json());
+
+  const postMonth = await fetch(
+    `http://127.0.0.1:5000/api/stats/postsmonth?q=${q}`
+  ).then((response) => response.json());
+
+  const split = await fetch(
+    `http://127.0.0.1:5000/api/stats/split?q=${q}`
+  ).then((response) => response.json());
+
+  const twitterUsers = await fetch(
+    `http://127.0.0.1:5000/api/stats/twitterusers?q=${q}`
+  ).then((response) => response.json());
+
+  const redditUsers = await fetch(
+    `http://127.0.0.1:5000/api/stats/redditusers?q=${q}`
+  ).then((response) => response.json());
+
+  return {
+    props: {
+      wordcloud: wordCounts,
+      likes: avgLikes,
+      upvotes: avgUpvotes,
+      postsmonth: postMonth,
+      split: split,
+      twitterusers: twitterUsers,
+      redditusers: redditUsers
+    },
+  };
+}

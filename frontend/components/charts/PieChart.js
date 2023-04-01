@@ -5,7 +5,7 @@ import configs from '../../configs';
 
 ChartJS.register(ArcElement, Title, Tooltip, Legend);
 
-export const data = {
+export const dummyData = {
   labels: ['twitter', 'reddit'],
   datasets: [
     {
@@ -16,8 +16,18 @@ export const data = {
   ],
 };
 
-function PieChart() {
-  return <Pie data={data} />;
+function PieChart({ data }) {
+  const newData = {
+    labels: ['twitter', 'reddit'],
+    datasets: [
+      {
+        label: 'Tweets/Posts',
+        data: [data.tweets, data.posts],
+        backgroundColor: [configs.twitterColor, configs.redditColor],
+      },
+    ],
+  };
+  return <Pie data={newData} />;
 }
 
 export default PieChart;
