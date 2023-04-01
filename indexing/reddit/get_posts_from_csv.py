@@ -25,7 +25,7 @@ def get_posts_from_csv():
         return actions
 
 def process_date(date):
-    date_formats = ["%m/%d/%Y %I:%M:%S %p", "%m/%d/%Y %H:%M"]
+    date_formats = ["%d/%m/%Y %I:%M:%S %p", "%d/%m/%Y %H:%M"]
     for date_format in date_formats:
         try:
             date_obj = datetime.strptime(date, date_format)
