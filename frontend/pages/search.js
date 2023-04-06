@@ -28,9 +28,6 @@ export default Search;
 
 export async function getServerSideProps(context) {
   const useDummyData = configs.useDummyData;
-  const apikey = process.env.API_KEY;
-  const cxkey = process.env.CONTEXTS_KEY;
-  const rapidkey = process.env.RAPID_KEY;
   const q = context.query.q;
   const startIndex = context.query.start || "0";
 
@@ -38,7 +35,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "",
+        destination: "/",
       },
     };
   }
@@ -48,23 +45,6 @@ export async function getServerSideProps(context) {
     : await fetch(
         `http://127.0.0.1:5000/api/search?q=${q}&start=${startIndex}`
       ).then((response) => response.json());
-
-  const options = {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "X-RapidAPI-Key": rapidkey,
-      "X-RapidAPI-Host": "google-search-5.p.rapidapi.com",
-    },
-    body: `{"gl":"US","hl":"en_US","keywords":["${context.query.q}"]}`,
-  };
-
-  // const secData = useDummyData
-  //   ? Response2
-  //   : await fetch(
-  //       "https://google-search-5.p.rapidapi.com/google/search-suggestions",
-  //       options
-  //     ).then((response) => response.json());
 
   return {
     props: {

@@ -3,6 +3,20 @@ import { HeartIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline';
 import { FaTwitter, FaRetweet } from 'react-icons/fa';
 
 function TwitterCard({ result }) {
+  result.polarity = 4;
+  let polarityColor;
+  let polarityText;
+  if (result.polarity == 0) {
+    polarityColor = 'bg-red-500 dark:bg-red-600';
+    polarityText = 'Negative';
+  } else if (result.polarity == 2) {
+    polarityColor = 'bg-amber-400 dark:bg-amber-500';
+    polarityText = 'Neutral';
+  } else {
+    polarityColor = 'bg-green-400 dark:bg-green-600';
+    polarityText = 'Positive';
+  }
+
   return (
     <div
       key={result._source.url}
@@ -25,6 +39,11 @@ function TwitterCard({ result }) {
           </h2>
         </a>
         <p className="text-xs text-gray-500">score: {result._score}</p>
+        <p
+          className={`inline-block px-2 py-0.5 ${polarityColor} text-white text-xs font-medium rounded-full`}
+        >
+          {polarityText}
+        </p>
       </div>
       <p className="mt-2 mb-2 line-clamp-3 text-gray-600 dark:text-gray-200">
         {result._source.original_tweet}
