@@ -19,50 +19,64 @@ def search_query():
         "query": {
             "function_score": {
                 "query": {
-                    "multi_match": {
-                        "query": query,
-                        "fields": ["processed_tweet", "original_post"],
-                        "type": "most_fields",
+                    "match": {
+                        "body": query
                     }
                 },
                 "functions": [
-                    {
-                        "field_value_factor": {
-                            "field": "likes",
-                            "factor": RANK_SCORE['likes'],
-                            "missing": 0,
-                        },
-                        "filter": {"term": {"_index": "twitter"}},
+                {
+                    "filter": {
+                        "term": {
+                            "relevance": 1
+                        }
                     },
-                    {
-                        "field_value_factor": {
-                            "field": "retweets",
-                            "factor": RANK_SCORE['retweets'],
-                            "missing": 0,
-                        },
-                        "filter": {"term": {"_index": "twitter"}},
+                    "weight": 2
+                },
+                {
+                    "filter": {
+                        "term": {
+                            "relevance": 0
+                        }
                     },
-                    {
-                        "field_value_factor": {
-                            "field": "upvotes",
-                            "factor": RANK_SCORE['upvotes'],
-                            "missing": 0,
-                        },
-                        "filter": {"term": {"_index": "reddit"}},
-                    },
-                    {
-                        "field_value_factor": {
-                            "field": "comments",
-                            "factor": RANK_SCORE['comments'],
-                            "missing": 0,
-                        },
-                        "filter": {"term": {"_index": "reddit"}},
-                    },
-                ],
+                        "weight": 1
+                },
+                {
+                    "field_value_factor": {
+                        "field": "likes",
+                        "factor": RANK_SCORE['likes'],
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                },
+                {
+                    "field_value_factor": {
+                        "field": "retweets",
+                        "factor": RANK_SCORE['retweets'],
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                },
+                {
+                    "field_value_factor": {
+                        "field": "upvotes",
+                        "factor": RANK_SCORE['upvotes'],
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                },
+                {
+                    "field_value_factor": {
+                        "field": "comments",
+                        "factor": RANK_SCORE['comments'],
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                }
+            ],
                 "score_mode": "sum",
-                "boost_mode": "sum",
+                "boost_mode": "sum"
             }
-        },
+        }
     }
 
 

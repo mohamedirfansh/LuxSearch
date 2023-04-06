@@ -13,7 +13,7 @@ def avg_likes():
         "size": 0,
         "query": {
             "match": {
-                "original_tweet": query
+                "body": query
             }
         },
         "aggs": {
@@ -34,7 +34,7 @@ def avg_upvotes():
         "size": 0,
         "query": {
             "match": {
-                "original_post": query
+                "body": query
             }
         },
         "aggs": {
@@ -52,16 +52,16 @@ def avg_upvotes():
 def wordcloud():
     query = request.args.get('q')
     query_body = {
-        "size": 20,
+        "size": 10,
         "query": {
             "match": {
-                "processed_tweet": query
+                "body": query
             }
         }
     }
-    res = elastic_client.search(index="twitter", body=query_body)
-    text = " ".join(hit["_source"]["processed_tweet"] for hit in res["hits"]["hits"])
-    words = text.replace("[", "").replace("]", "").replace("'", "").split(", ")
+    res = elastic_client.search(index="twitter,reddit", body=query_body)
+    text = " ".join(hit["_source"]["body"].lower() for hit in res["hits"]["hits"])
+    words = text.replace("  ", " ").split(" ")
     word_counts = Counter(words)
     word_cloud = [{"value": word, "count": count} for word, count in word_counts.items()]
     word_cloud = sorted(word_cloud, key=lambda x: x["count"], reverse=True)
@@ -77,7 +77,7 @@ def postsmonth():
         "size": 0,
         "query": {
             "match": {
-                "original_tweet": query
+                "body": query
             }
         },
         "aggs": {
@@ -93,7 +93,7 @@ def postsmonth():
         "size": 0,
         "query": {
             "match": {
-                "original_post": query
+                "body": query
             }
         },
         "aggs": {
@@ -131,7 +131,7 @@ def split():
         "size": 0,
         "query": {
             "match": {
-                "original_tweet": query
+                "body": query
             }
         }
     }
@@ -139,7 +139,7 @@ def split():
         "size": 0,
         "query": {
             "match": {
-                "original_post": query
+                "body": query
             }
         }
     }
@@ -160,7 +160,7 @@ def top_twitter_users():
         "size": 0,
         "query": {
             "match": {
-                "processed_tweet": query
+                "body": query
             }
         },
         "aggs": {
@@ -187,7 +187,7 @@ def top_reddit_users():
         "size": 0,
         "query": {
             "match": {
-                "original_post": query
+                "body": query
             }
         },
         "aggs": {
@@ -214,7 +214,7 @@ def top_subreddit():
         "size": 0,
         "query": {
             "match": {
-                "original_post": query
+                "body": query
             }
         },
         "aggs": {
@@ -226,5 +226,10 @@ def top_subreddit():
             }
         }
     }
-    res = elastic_client.search(index="reddit", body=query_body)
+    subreddits = elastic_client.search(index="reddit", body=query_body)
+    res = {
+        'index': 'reddit',
+        'labels': [f"r/{bucket['key']}" for bucket in subreddits['aggregations']['group_by_username']['buckets']],
+        'data': [bucket['doc_count'] for bucket in subreddits['aggregations']['group_by_username']['buckets']]
+    }
     return jsonify(res)
