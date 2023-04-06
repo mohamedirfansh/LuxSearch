@@ -1,12 +1,12 @@
-import Head from "next/head";
-import React from "react";
-import Header from "../components/header/Header";
-import Response from "../dummy_response/Response";
-import Response2 from "../dummy_response/Response2";
+import Head from 'next/head';
+import React from 'react';
+import Header from '../components/header/Header';
+import Response from '../dummy_response/Response';
+import Response2 from '../dummy_response/Response2';
 
-import { useRouter } from "next/router";
-import SearchResults from "../components/search-container/SearchResults";
-import Footer from "../components/Footer";
+import { useRouter } from 'next/router';
+import SearchResults from '../components/search-container/SearchResults';
+import Footer from '../components/Footer';
 import configs from '../configs';
 
 function Search({ results, related }) {
@@ -14,7 +14,7 @@ function Search({ results, related }) {
   return (
     <div>
       <Head>
-        <title>{`${router.query.q || "LuxSearch"} - Search Results`}</title>
+        <title>{`${router.query.q || 'LuxSearch'} - Search Results`}</title>
         <link rel="icon" href="/favicon.ico?v=2" />
       </Head>
       <Header q={router.query.q} />
@@ -28,23 +28,24 @@ export default Search;
 
 export async function getServerSideProps(context) {
   const useDummyData = configs.useDummyData;
+  const apiURL = process.env.API_URL;
   const q = context.query.q;
-  const startIndex = context.query.start || "0";
+  const startIndex = context.query.start || '0';
 
   if (q === undefined || q === null || q.length < 1) {
     return {
       redirect: {
         permanent: false,
-        destination: "/",
+        destination: '/',
       },
     };
   }
 
   const resData = useDummyData
     ? Response
-    : await fetch(
-        `http://127.0.0.1:5000/api/search?q=${q}&start=${startIndex}`
-      ).then((response) => response.json());
+    : await fetch(`${apiURL}/search?q=${q}&start=${startIndex}`).then(
+        (response) => response.json()
+      );
 
   return {
     props: {

@@ -3,13 +3,12 @@ import { HeartIcon, ArrowsUpDownIcon } from '@heroicons/react/24/outline';
 import { FaTwitter, FaRetweet } from 'react-icons/fa';
 
 function TwitterCard({ result }) {
-  result.polarity = 4;
   let polarityColor;
   let polarityText;
-  if (result.polarity == 0) {
+  if (result._source.polarity == 0) {
     polarityColor = 'bg-red-500 dark:bg-red-600';
     polarityText = 'Negative';
-  } else if (result.polarity == 2) {
+  } else if (result._source.polarity == 2) {
     polarityColor = 'bg-amber-400 dark:bg-amber-500';
     polarityText = 'Neutral';
   } else {
@@ -46,7 +45,7 @@ function TwitterCard({ result }) {
         </p>
       </div>
       <p className="mt-2 mb-2 line-clamp-3 text-gray-600 dark:text-gray-200">
-        {result._source.original_tweet}
+        {result._source.body}
       </p>
       <div className="flex text-gray-500 dark:text-gray-300">
         <div className="flex items-center space-x-1 mr-5">

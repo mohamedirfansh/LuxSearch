@@ -1,11 +1,15 @@
 import React from 'react';
 import PagBtns from '../PagBtns';
-import { useRouter } from 'next/router';
 import Sentiment from './Sentiment';
 import RedditCard from '../search-card/RedditCard';
 
 function SearchResults({ results }) {
-  const router = useRouter();
+  const polarities = results?.hits?.hits?.map((hit) =>
+    parseInt(hit._source.polarity)
+  );
+  const sum = polarities.reduce((total, polarity) => total + polarity, 0);
+  const avgPolarity = sum / polarities.length;
+
   return (
     <div className="mx-auto w-full px-3 sm:pl[5%] md:pl-[14%] lg:pl-48  dark:bg-primary-dark dark:text-white">
       <p className="text-gray-600 text-md mb-5 mt-3 dark:text-gray-400">
@@ -19,7 +23,7 @@ function SearchResults({ results }) {
           ))}
         </div>
 
-        <Sentiment value={0.25} />
+        <Sentiment value={avgPolarity / 4} />
       </div>
 
       <PagBtns />

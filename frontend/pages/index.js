@@ -4,8 +4,6 @@ import Head from 'next/head';
 import Avatar from '../components/Avatar';
 import {
   MagnifyingGlassIcon,
-  Squares2X2Icon,
-  MicrophoneIcon,
 } from '@heroicons/react/24/outline';
 
 import Image from 'next/image';
@@ -41,15 +39,11 @@ export default function Home() {
       <header className="flex w-full p-4 justify-between text-sm text-gray-700 dark:text-white">
         <div className="flex space-x-4 items-center"></div>
         <div className="flex space-x-4 items-center align-right">
-          {/* <Squares2X2Icon className="h-10 w-10 p-2 hover:bg-gray-200 dark:hover:bg-secondary-dark rounded-lg cursor-pointer" /> */}
           <Avatar />
         </div>
       </header>
 
       <form className="flex flex-col items-center mt-24 flex-grow w-4/5">
-        {/* <p className="text-2xl bg-violet-700 font-bold text-white py-1 px-2 rounded dark:bg-gray-50 dark:text-gray-900">
-          LuxSearch
-        </p> */}
         <Image
           alt="LuxSearch"
           src="/images/logo2.png"
@@ -77,7 +71,6 @@ export default function Home() {
           </button>
         </div>
       </form>
-
       <Footer />
     </div>
   );

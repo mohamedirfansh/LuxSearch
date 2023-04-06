@@ -4,23 +4,19 @@ function Sentiment({ value }) {
   let color;
   if (value <= 0.25) {
     color = 'bg-red-500 dark:bg-red-600';
-  } else if (0.25 < value && value < 0.75) {
+  } else if (0.33 < value && value < 0.66) {
     color = 'bg-amber-400 dark:bg-amber-500';
   } else {
     color = 'bg-green-400 dark:bg-green-600';
   }
 
   let sentiment;
-  if (value < 0.2) {
-    sentiment = 'Very Negative 😡';
-  } else if (0.2 <= value && value < 0.4) {
-    sentiment = 'Negative 😠';
-  } else if (0.4 <= value && value < 0.6) {
+  if (value <= 0.33) {
+    sentiment = 'Negative 😡';
+  } else if (0.33 < value && value < 0.66) {
     sentiment = 'Neutral 😐';
-  } else if (0.6 <= value && value < 0.8) {
-    sentiment = 'Positive 😊';
   } else {
-    sentiment = 'Very Positive 🤩';
+    sentiment = 'Positive 🤩';
   }
 
   return (

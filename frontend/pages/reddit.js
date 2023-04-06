@@ -27,6 +27,7 @@ export default Reddit;
 
 export async function getServerSideProps(context) {
   const useDummyData = configs.useDummyData;
+  const apiURL = process.env.API_URL;
   const q = context.query.q;
   const startIndex = context.query.start || '0';
 
@@ -41,9 +42,9 @@ export async function getServerSideProps(context) {
 
   const resData = useDummyData
     ? ResponseReddit
-    : await fetch(
-        `http://127.0.0.1:5000/api/reddit?q=${q}&start=${startIndex}`
-      ).then((response) => response.json());
+    : await fetch(`${apiURL}/reddit?q=${q}&start=${startIndex}`).then(
+        (response) => response.json()
+      );
 
   return {
     props: {

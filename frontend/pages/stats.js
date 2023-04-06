@@ -6,7 +6,16 @@ import { useRouter } from 'next/router';
 import configs from '../configs';
 import StatResults from '../components/search-container/StatsResults';
 
-function Stats({ wordcloud, likes, upvotes, postsmonth, split, twitterusers, redditusers }) {
+function Stats({
+  wordcloud,
+  likes,
+  upvotes,
+  postsmonth,
+  split,
+  twitterusers,
+  redditusers,
+  subreddit
+}) {
   const router = useRouter();
 
   return (
@@ -24,6 +33,7 @@ function Stats({ wordcloud, likes, upvotes, postsmonth, split, twitterusers, red
         split={split}
         twitterusers={twitterusers}
         redditusers={redditusers}
+        subreddit={subreddit}
       />
       <Footer />
     </div>
@@ -33,6 +43,7 @@ function Stats({ wordcloud, likes, upvotes, postsmonth, split, twitterusers, red
 export default Stats;
 
 export async function getServerSideProps(context) {
+  const apiURL = process.env.API_URL;
   const q = context.query.q;
 
   if (q === undefined || q === null || q.length < 1) {
@@ -44,33 +55,37 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const wordCounts = await fetch(
-    `http://127.0.0.1:5000/api/stats/wordcloud?q=${q}`
-  ).then((response) => response.json());
+  const wordCounts = await fetch(`${apiURL}/stats/wordcloud?q=${q}`).then(
+    (response) => response.json()
+  );
 
-  const avgLikes = await fetch(
-    `http://127.0.0.1:5000/api/stats/likes?q=${q}`
-  ).then((response) => response.json());
+  const avgLikes = await fetch(`${apiURL}/stats/likes?q=${q}`).then(
+    (response) => response.json()
+  );
 
-  const avgUpvotes = await fetch(
-    `http://127.0.0.1:5000/api/stats/upvotes?q=${q}`
-  ).then((response) => response.json());
+  const avgUpvotes = await fetch(`${apiURL}/stats/upvotes?q=${q}`).then(
+    (response) => response.json()
+  );
 
-  const postMonth = await fetch(
-    `http://127.0.0.1:5000/api/stats/postsmonth?q=${q}`
-  ).then((response) => response.json());
+  const postMonth = await fetch(`${apiURL}/stats/postsmonth?q=${q}`).then(
+    (response) => response.json()
+  );
 
-  const split = await fetch(
-    `http://127.0.0.1:5000/api/stats/split?q=${q}`
-  ).then((response) => response.json());
+  const split = await fetch(`${apiURL}/stats/split?q=${q}`).then((response) =>
+    response.json()
+  );
 
-  const twitterUsers = await fetch(
-    `http://127.0.0.1:5000/api/stats/twitterusers?q=${q}`
-  ).then((response) => response.json());
+  const twitterUsers = await fetch(`${apiURL}/stats/twitterusers?q=${q}`).then(
+    (response) => response.json()
+  );
 
-  const redditUsers = await fetch(
-    `http://127.0.0.1:5000/api/stats/redditusers?q=${q}`
-  ).then((response) => response.json());
+  const redditUsers = await fetch(`${apiURL}/stats/redditusers?q=${q}`).then(
+    (response) => response.json()
+  );
+
+  const subreddit = await fetch(`${apiURL}/stats/subreddit?q=${q}`).then(
+    (response) => response.json()
+  );
 
   return {
     props: {
@@ -80,7 +95,8 @@ export async function getServerSideProps(context) {
       postsmonth: postMonth,
       split: split,
       twitterusers: twitterUsers,
-      redditusers: redditUsers
+      redditusers: redditUsers,
+      subreddit: subreddit
     },
   };
 }
