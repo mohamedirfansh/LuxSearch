@@ -48,8 +48,48 @@ def get_data(index, query):
     data = {
         "size": 10,
         "query": {
-            "match": {
-            "processed_tweet": query
+            "function_score": {
+            "query": {
+                "match": {
+                    "body": query
+                }
+            },
+            "functions": [
+                {
+                    "filter": {
+                        "term": {
+                            "relevance": 1
+                        }
+                    },
+                    "weight": 2
+                },
+                {
+                    "filter": {
+                        "term": {
+                            "relevance": 0
+                        }
+                    },
+                        "weight": 1
+                },
+                {
+                    "field_value_factor": {
+                        "field": "likes",
+                        "factor": 0.1,
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                },
+                {
+                    "field_value_factor": {
+                        "field": "retweets",
+                        "factor": 0.1,
+                        "modifier": "log1p",
+                        "missing": 1
+                    }
+                }
+            ],
+                "score_mode": "sum",
+                "boost_mode": "sum"
             }
         }
     }

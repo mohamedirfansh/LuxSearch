@@ -1,7 +1,7 @@
 import csv
 
 def get_tweets_from_csv():
-    with open('processed_tweets.csv', 'r', encoding='utf-8') as file:
+    with open('tweets_final.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         actions = []
         try:
@@ -15,8 +15,9 @@ def get_tweets_from_csv():
                     'likes': row['Number of Likes'],
                     'retweets': row['Number of Retweets'],
                     'url': row['URL'],
-                    'original_tweet': row['Tweet'],
-                    'processed_tweet': row['Tokenized Clean LowerCase Data']
+                    'relevance': row['Relevance'],
+                    'polarity': row['Polarity'],
+                    'body': row['Tweet']
                 }
                 actions.append(action)
                 actions.append(tweet)

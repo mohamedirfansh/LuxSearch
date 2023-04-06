@@ -6,8 +6,11 @@
       "upvotes": { "type": "integer" },
       "comments": { "type": "integer" },
       "url": { "type": "keyword" },
-      "subreddit": { "type": "text" },
-      "original_post": {
+      "subreddit": { "type": "keyword" },
+      "title": { "type": "text" },
+      "relevance": { "type": "integer" },
+      "polarity": { "type": "integer" },
+      "body": {
         "type": "text",
         "analyzer": "custom_analyzer"
       }

@@ -2,7 +2,7 @@ import csv
 from datetime import datetime
 
 def get_posts_from_csv():
-    with open('processed_reddit.csv', 'r', encoding='utf-8') as file:
+    with open('posts_final.csv', 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         actions = []
         for row in reader:
@@ -14,14 +14,16 @@ def get_posts_from_csv():
                 'username': row['Author'],
                 'date': process_date(row['Date']),
                 'subreddit': row['Subreddit'],
+                'title': row['Title'],
                 'upvotes': row['Upvotes'],
                 'comments': row['CommentsCount'],
                 'url': row['URL'],
-                'original_post': row['Data']
+                'relevance': row['Relevance'],
+                'polarity': row['Polarity'],
+                'body': row['Data']
             }
             actions.append(action)
             actions.append(post)
-        print(actions)
         return actions
 
 def process_date(date):

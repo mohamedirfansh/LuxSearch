@@ -6,14 +6,52 @@
       "likes": { "type": "integer" },
       "retweets": { "type": "integer" },
       "url": { "type": "keyword" },
-      "original_tweet": {
+      "relevance": { "type": "integer" },
+      "polarity": { "type": "integer" },
+      "body": {
         "type": "text",
-        "store": true
+        "analyzer": "custom_analyzer"
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "char_filter": ["email_filter", "html_strip"],
+          "filter": [
+            "lowercase",
+            "stop",
+            "english_stemmer",
+            "remove_numbers",
+            "remove_punctuation"
+          ]
+        }
       },
-      "processed_tweet": {
-        "type": "text",
-        "index": true,
-        "store": false
+      "char_filter": {
+        "email_filter": {
+          "type": "pattern_replace",
+          "pattern": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+          "replacement": ""
+        }
+      },
+      "filter": {
+        "english_stemmer": {
+          "type": "stemmer",
+          "language": "english"
+        },
+        "remove_numbers": {
+          "type": "pattern_replace",
+          "pattern": "\\d+",
+          "replacement": ""
+        },
+        "remove_punctuation": {
+          "type": "pattern_replace",
+          "pattern": "[^A-Za-z0-9\\s]",
+          "replacement": ""
+        }
       }
     }
   }
