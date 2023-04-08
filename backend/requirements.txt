@@ -2,3 +2,4 @@ Flask==2.2.2
 Flask_Cors==3.0.10
 python-dotenv==0.21.1
 elasticsearch==7.13
+Gunicorn
