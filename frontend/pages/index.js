@@ -2,9 +2,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Avatar from '../components/Avatar';
-import {
-  MagnifyingGlassIcon,
-} from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import Image from 'next/image';
 import Footer from '../components/Footer';
@@ -65,9 +63,6 @@ export default function Home() {
         <div className="flex mt-8 space-x-3">
           <button onClick={search} className="btn">
             Search
-          </button>
-          <button onClick={search} className="btn">
-            Advanced Search
           </button>
         </div>
       </form>

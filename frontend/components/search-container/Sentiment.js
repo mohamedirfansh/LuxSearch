@@ -2,7 +2,7 @@ import React from 'react';
 
 function Sentiment({ value }) {
   let color;
-  if (value <= 0.25) {
+  if (value <= 0.33) {
     color = 'bg-red-500 dark:bg-red-600';
   } else if (0.33 < value && value < 0.66) {
     color = 'bg-amber-400 dark:bg-amber-500';
@@ -27,7 +27,7 @@ function Sentiment({ value }) {
           className={`${color} p-0.5 text-center text-xs font-medium leading-none text-primary-100 rounded-full h-4`}
           style={{ width: `${value * 100}%` }}
         >
-          {`${value * 100}%`}
+          {`${Math.round(value * 100)}%`}
         </div>
       </div>
       <h3 className="text-md mt-5 font-bold">{sentiment}</h3>
