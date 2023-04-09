@@ -25,10 +25,3 @@ Limitations
 
 Results: [PushShiftAPI](../data-scraping/Data/PushShiftAPI.xlsx)
 
-### Data Preprocessing
-Items removed: 
-1. URLs in text data
-2. Emails
-3. Punctuations
-4. Numbers
-5. Stopwords (included nan and removed; excluded not and no) --> used nltk.corpus stopwords
